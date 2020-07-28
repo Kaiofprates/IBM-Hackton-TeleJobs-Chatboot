@@ -1,0 +1,29 @@
+{
+  "name": "ibmbot",
+  "version": "1.0.0",
+  "description": "chatboot for Call For Code hackathon",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/index.js"
+  },
+  "keywords": [
+    "chatboot",
+    "ibm",
+    "watson",
+    "node",
+    "telegram"
+  ],
+  "author": "Kaio F Prates",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "dotenv": "^8.2.0",
+    "ibm-watson": "^5.6.1",
+    "mongoose": "^5.9.26",
+    "node-telegram-bot-api": "^0.50.0",
+    "nodemon": "^2.0.4",
+    "redis": "^3.0.2",
+    "telegram-bot-api": "^2.0.0"
+  }
+}
