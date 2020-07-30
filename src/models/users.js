@@ -7,6 +7,7 @@ const users = new Schema({
   chatId: { type: String, required: true, unique: true },
   phone: { type: String, required: false, unique: true },
   location: { type: [Number], required: false },
+  job: { type: String, required: false },
 });
 
 const userModel = mongoose.model("User", users);
