@@ -6,28 +6,61 @@ require("dotenv/config");
 
 async function getAllusers(id) {
   const result = await db.getAll();
-  bot.sendMessage(id, result.toString());
+  bot.sendMessage(
+    id,
+    " LOGO A BAIXO UMA LISTA DOS PROFISSIONAIS  PERTO DE VOCÊ "
+  );
+  result.map((e) => {
+    bot.sendMessage(
+      id,
+      `
+     Nome: ${e.username ? e.username : "não informado"} 
+     Telefone:  ${e.phone ? e.phone : "não informado"}
+     ${e.job ? e.job : "Atividade: não informado"}
+  
+    `
+    );
+  });
+  //bot.sendMessage(id, result.toString());
   return result;
 }
 
 async function createUser(c, u, phone, location) {
-  const check = await db.check(c);
-  if (check) {
+  try {
     const result = await db.create(c, u, phone, location);
-    bot.sendMessage(c, result.toString());
-    bot.sendLocation(c, result.location[0], result.location[1]);
-  } else {
+    if (result) {
+      // bot.sendMessage(c, u + " " + "Cadastrado com sucesso!");
+    } else {
+      bot.sendMessage(c, "Algo deu errado, tente novamente.");
+    }
+  } catch (err) {
     bot.sendMessage(c, "Erro ao cadastrar");
   }
 }
-//------------------
-// bot.onText(/login/, async (msg) => {
-//   if (msg.chat.id && msg.chat.username) {
-//     createUser(msg.chat.id, msg.chat.username);
-//   }
-// });
 
-bot.onText(/Ananda/, async (msg) => {
+async function updateJog(chatId, job) {
+  const result = await db.updateJob(chatId, job);
+  if (!result) {
+    bot.sendMessage(
+      chatId,
+      `
+    Muito bem, seu cadastro foi feito com sucesso!
+    Se quiser uma lista de profissionais cadastrados é só pedir!
+    `
+    );
+  } else {
+    bot.sendMessage(
+      chatId,
+      "Algo aconteceu errado, tente efetuar o cadastro novamente"
+    );
+  }
+}
+
+bot.onText(/Atividade/, async (msg, match) => {
+  updateJog(msg.chat.id, msg.text);
+});
+
+bot.onText(/Bruno/, async (msg) => {
   const chatId = msg.chat.id;
   console.log(chatId);
 
@@ -82,11 +115,23 @@ bot.onText(/Ananda/, async (msg) => {
             ${latitude}
             ${longitude}
             `);
-            if (msg.chat.id && msg.chat.username) {
-              createUser(msg.chat.id, user, msg.contact.phone_number, [
+            if (msg.chat.id) {
+              await createUser(msg.chat.id, user, msg.contact.phone_number, [
                 latitude,
                 longitude,
               ]);
+              bot.sendMessage(
+                msg.chat.id,
+                `
+Falta pouco!
+
+Agora precisamos saber um pouco mais sobre suas atividades.
+Descreva sua profissão seguindo o modelo: 
+
+Atividade: Carpinteiro, Autonomo, Pedreiro, etc...
+
+`
+              );
             }
           });
         }
@@ -94,9 +139,20 @@ bot.onText(/Ananda/, async (msg) => {
         let id = await getSessionId();
         console.log(id);
         setCache(chatId, id.result.session_id);
+        bot.sendPhoto(
+          chatId,
+          "https://image.freepik.com/vetores-gratis/robo-engracado-sorridente-fofo-acenando_92289-204.jpg"
+        );
         bot.sendMessage(
           chatId,
-          "Oiii, não consegui te entender! Diga novamente!"
+
+          `
+      Olá, Eu sou o Bruno do TeleJobs!
+           
+      Para se cadastrar, atualizar seus dados, ou pedir uma lista de profissionais 
+      é só falar comigo que eu ficarei feliz em lhe atender. 
+      Ah, eu gosto de ser chamado por meu nome :)
+          `
         );
       }
     } catch (err) {}
