@@ -1,0 +1,376 @@
+{
+  "intents": [
+    {
+      "intent": "boas_vindas",
+      "examples": [
+        {
+          "text": "Boa tarde"
+        },
+        {
+          "text": "Boa noite"
+        },
+        {
+          "text": "Bom dia"
+        },
+        {
+          "text": "Oi"
+        },
+        {
+          "text": "Tudo bem ?"
+        },
+        {
+          "text": "Ola "
+        },
+        {
+          "text": "tudo bem "
+        },
+        {
+          "text": "Oi "
+        },
+        {
+          "text": "Como vai "
+        },
+        {
+          "text": "Bruno"
+        },
+        {
+          "text": "Ola"
+        }
+      ],
+      "description": "cumprimenta o usuário"
+    },
+    {
+      "intent": "agradecimento",
+      "examples": [
+        {
+          "text": "tudo bem, por ter me ajudado"
+        },
+        {
+          "text": "Valeu demais"
+        },
+        {
+          "text": "Muito obrigado pela ajuda"
+        },
+        {
+          "text": "Salvou ae"
+        },
+        {
+          "text": "Muito bem"
+        },
+        {
+          "text": "muito obrigada"
+        },
+        {
+          "text": "muito obrigado"
+        },
+        {
+          "text": "me ajudou bastante"
+        },
+        {
+          "text": "valeu pela ajuda"
+        },
+        {
+          "text": "me salvou viu"
+        },
+        {
+          "text": "ajudou bastante"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "login",
+      "examples": [
+        {
+          "text": "Fazer cadastro"
+        },
+        {
+          "text": "Quero fazer meu login"
+        },
+        {
+          "text": "fazer registro"
+        },
+        {
+          "text": "quero me registrar no aplicativo"
+        },
+        {
+          "text": "fazer login"
+        },
+        {
+          "text": "Quero me cadastrar"
+        },
+        {
+          "text": "Entrar"
+        },
+        {
+          "text": "Quero fazer meu cadastro"
+        },
+        {
+          "text": "Gostaria de me cadastrar"
+        },
+        {
+          "text": "Gostaria de fazer login"
+        },
+        {
+          "text": "Gostaria de fazer meu registro"
+        },
+        {
+          "text": "registrar"
+        },
+        {
+          "text": "cadastrar"
+        },
+        {
+          "text": "login"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "delete",
+      "examples": [
+        {
+          "text": "Apagar"
+        },
+        {
+          "text": "deletar"
+        },
+        {
+          "text": "quero apagar minha conta"
+        },
+        {
+          "text": "quero sair da minha conta"
+        },
+        {
+          "text": "quero excluir"
+        },
+        {
+          "text": "quero desfazer meu cadastro"
+        },
+        {
+          "text": "excluir"
+        },
+        {
+          "text": "Quero excluir minha conta"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "usuarios",
+      "examples": [
+        {
+          "text": "Mostre-me os usuários"
+        },
+        {
+          "text": "Eu preciso de um programador"
+        },
+        {
+          "text": "Eu preciso de um carpinteiro"
+        },
+        {
+          "text": "Eu preciso de um pedreiro"
+        },
+        {
+          "text": "Eu preciso de uma empregada"
+        },
+        {
+          "text": "quais profissionais temos na redondeza?"
+        },
+        {
+          "text": "quais profissionais temos por perto?"
+        },
+        {
+          "text": "me de uma lista de profissões"
+        },
+        {
+          "text": "Lista de profissionais"
+        },
+        {
+          "text": "Perfil de usuários"
+        },
+        {
+          "text": "quais são os usuários do chat"
+        },
+        {
+          "text": "Usuários do chat"
+        },
+        {
+          "text": "me dê os chat ids"
+        },
+        {
+          "text": "pode me passar os chatid ?"
+        },
+        {
+          "text": "poderia me retornar a lista de usuários?"
+        },
+        {
+          "text": "Lista de usuários"
+        }
+      ],
+      "description": "retorna a lista de usuários"
+    }
+  ],
+  "entities": [],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Bem-vindo",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Olá. Como posso te ajudar?"
+              },
+              {
+                "text": "Olá, tudo ok! Como posso te ajudar hoje?"
+              },
+              {
+                "text": "Oiii, posso te ajudar?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#boas_vindas",
+      "dialog_node": "Bem-vindo",
+      "previous_sibling": "node_1_1595952030623"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "login"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#login",
+      "dialog_node": "node_1_1595952030623",
+      "previous_sibling": "node_8_1595987640428"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "users"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "user_input",
+        "dialog_node": "Em outros casos"
+      },
+      "conditions": "#usuarios",
+      "dialog_node": "node_1_1595882703921",
+      "previous_sibling": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "Em outros casos",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Eu não entendi. Você pode tentar reformular a frase."
+              },
+              {
+                "text": "Você pode reformular sua afirmação? Eu não estou entendendo."
+              },
+              {
+                "text": "Eu não entendi o sentido."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Em outros casos",
+      "previous_sibling": "node_1_1595882703921",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Por nada!"
+              },
+              {
+                "text": "Só fiz a minha obrigação."
+              },
+              {
+                "text": "Suave na nave."
+              },
+              {
+                "text": "Ok, na proxima não me chame."
+              },
+              {
+                "text": "Isso fica feliz em servi-los!"
+              },
+              {
+                "text": "Tudo bem, agora vai trabalhar. "
+              },
+              {
+                "text": "Vai resolver suas issues... "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#agradecimento",
+      "dialog_node": "node_4_1595989220395"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": "Você quis dizer:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "Nenhuma das anteriores"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Você quis dizer:"
+    }
+  },
+  "learning_opt_out": false,
+  "name": "orquestrar chatbot",
+  "language": "pt-br",
+  "description": "orquestra o telegram chatbot"
+}
